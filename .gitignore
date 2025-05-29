@@ -1,0 +1,26 @@
+# Ignore node_modules (for Node.js projects)
+node_modules/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore Visual Studio files
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore log files
+*.log
+
+# Ignore build output
+dist/
+build/
+out/
+bin/
+obj/
