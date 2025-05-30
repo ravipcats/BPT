@@ -1,56 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Bootstrap CSS removed -->
+    <title>Numbers Table</title>
   </head>
   <body>
-    <div>
-      <h1>Shifts</h1>
-      <form id="shift-form">
-        <input id="employee" placeholder="Employee" required>
-        <input id="date" type="date" required>
-        <input id="sales" type="number" placeholder="Sales" required>
-        <button type="submit">Add Shift</button>
-      </form>
-      <ul id="shift-list"></ul>
-      <button id="employee-list-btn">Employee List</button>
-    </div>
+    <h1>Numbers 1 to 100 (Horizontal)</h1>
+    <table id="numbers-table" border="1">
+      <thead>
+        <tr>
+          <th colspan="100">Numbers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="numbers-row">
+          <!-- Numbers will be inserted here -->
+        </tr>
+      </tbody>
+    </table>
     <script>
-      function loadShifts() {
-        window.api.getShifts().then(shifts => {
-          const list = document.getElementById('shift-list');
-          list.innerHTML = '';
-          shifts.forEach(shift => {
-            const li = document.createElement('li');
-            li.textContent = `${shift.employee} - ${shift.date} - Sales: ${shift.sales} `;
-            const delBtn = document.createElement('button');
-            delBtn.textContent = 'Delete';
-            delBtn.onclick = () => {
-              window.api.deleteShift(shift.id).then(() => loadShifts());
-            };
-            li.appendChild(delBtn);
-            list.appendChild(li);
-          });
-        });
+      const row = document.getElementById('numbers-row');
+      for (let i = 1; i <= 100; i++) {
+        const td = document.createElement('td');
+        td.textContent = i;
+        row.appendChild(td);
       }
-
-      document.getElementById('shift-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const employee = document.getElementById('employee').value;
-        const date = document.getElementById('date').value;
-        const sales = parseInt(document.getElementById('sales').value, 10);
-        window.api.addShift({ employee, date, sales }).then(() => {
-          loadShifts();
-        });
-      });
-
-      document.getElementById('employee-list-btn').onclick = () => {
-        window.location = 'employee/employeelist.html';
-      };
-
-      loadShifts();
-
     </script>
-    <script src="components/Admin_Navbar.js"></script>
   </body>
 </html>
